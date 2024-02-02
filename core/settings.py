@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # My Apps
+    "user.apps.UserConfig",
+    "magicai",
+    # Other
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +60,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS":  [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -116,9 +121,53 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+# STATIC_ROOT = 'staticfiles'
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# When requests are redirected after login
+LOGIN_REDIRECT_URL = 'magicai:home'
+# When requests are redirected for login when using login_required
+LOGIN_URL = 'user:login'
+# When requests are redirected after logout
+LOGOUT_REDIRECT_URL = 'user:login'
+
+
+# Custom user model
+AUTH_USER_MODEL = "user.UserBase"
+
+# # When requests are redirected after login
+# LOGIN_REDIRECT_URL = 'pl:home'
+# # When requests are redirected for login when using login_required
+# LOGIN_URL = 'account:login'
+# # When requests are redirected after logout
+# LOGOUT_REDIRECT_URL = 'account:login'
+
+
+from django.contrib import messages
+
+# Message Django/Bootstrap
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-info',
+        messages.INFO: 'alert-secondary',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
+
+#  Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER =  os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')

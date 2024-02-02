@@ -1,0 +1,52 @@
+{% extends '../../base/base.html' %}
+{% load  widget_tweaks %}
+
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="card ">
+    <div class="card-header ">
+        Featured
+    </div>
+    <div class="card-body">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="container ">
+
+                <div id="username">
+                    <div class="form-group mt-2 ">
+                        <label class="fw-bold" for="{{ form.username.id_for_label }}">{{ form.username.label|title }} {% if form.fields.username.required %}<span class="text-warning">*</span>{% endif %}</label><br />
+                        {% render_field form.username class+="form-control " data-label=form.username.label|title data-placeholder="-" %}
+                        {% if form.username.errors %}<label class="text-danger">{{ form.username.errors }}</label>{% endif %}
+                    </div>
+                </div>
+
+                <div id="password">
+                    <div class="form-group mt-2 ">
+                        <label class="fw-bold" for="{{ form.password.id_for_label }}">{{ form.password.label|title }} {% if form.fields.password.required %}<span class="text-warning">*</span>{% endif %}</label><br />
+                        {% render_field form.password class+="form-control" data-label=form.password.label|title data-placeholder="-" %}
+                        {% if form.password.errors %}<label class="text-danger my-1">{{ form.password.errors }}</label>{% endif %}
+                        <p class="mt-1 text-danger">{{form.password.help_text}}</p>
+
+                    </div>
+                </div>
+
+            <button type="submit" class="btn button-primary mt-3 col-12">
+                <span>Login</span>
+            </button>
+            <a href="{% url 'user:registration' %}" class="btn button-primary mt-3 col-12">
+                <span>Signup</span>
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

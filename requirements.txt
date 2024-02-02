@@ -1,2 +1,6 @@
 Django==5.0.1
 black==23.12.1
+python-ulid==2.2.0
+Pillow==10.2.0
+six==1.16.0
+django-widget-tweaks==1.5.0

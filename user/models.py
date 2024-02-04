@@ -66,6 +66,11 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
         return self.username
 
 
+    def get_latest_prompt(self):
+        return self.user_prompts.order_by("-created_at").first()
+
+
+
 class Profile(models.Model):
     user = models.OneToOneField(UserBase, on_delete=models.CASCADE)
 

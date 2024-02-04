@@ -1,0 +1,46 @@
+{% extends '../base/base.html' %}
+{% load  widget_tweaks %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block staticfiles %}
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=65be5dd71eabb90019a54660&product=image-share-buttons&source=platform" async="async"></script>
+{% endblock %}
+
+{% block content %}
+<div class="card prompt-card">
+
+    <div class="card-body">
+        <div class="container h-100">
+            {% if request.GET.answer %}
+                <a href="{% url 'magicai:user_prompt' %}" class="btn button-primary m-3 col-5">
+                    Back
+                </a>
+                <div class="h-100 d-flex flex-column align-items-center justify-content-center overflow-auto">
+                    <p>{{answer.quran_res | linebreaks}}</p>
+                </div>
+
+                {% comment %} <div class="sharethis-inline-share-buttons"></div> {% endcomment %}
+            {% else %}
+                <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                        <H2 class="card-title text-center">How Are You Feeling?</H2>
+                        <div id="prompt">
+                            <div class="form-group mt-2 ">
+                                {% render_field form.prompt class+="form-control " data-label=form.prompt.label|title data-placeholder="-" %}
+                                {% if form.prompt.errors %}<label class="text-danger">{{ form.prompt.errors }}</label>{% endif %}
+                            </div>
+                        </div>
+
+                    <button type="submit" class="btn button-primary mt-3 col-12">
+                        Submit
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

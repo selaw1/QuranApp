@@ -20,22 +20,22 @@ install:
 	. env/bin/activate && pip$(PYTHON_VERSION) install -r requirements.txt --use-pep517
 
 migrate:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py migrate
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py migrate
 
 revert_migrate:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py migrate ${app} ${migration}
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py migrate ${app} ${migration}
 
 migrations:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py makemigrations
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py makemigrations
 
 empty-migrations:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py makemigrations --empty ${app}
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py makemigrations --empty ${app}
 
 superuser:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py createsuperuser
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py createsuperuser
 
 startapp:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py startapp ${app_name}
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py startapp ${app_name}
 
 format:
 	. env/bin/activate && black .
@@ -50,17 +50,17 @@ test_app:
 	TESTS_DB="True"  . env/bin/activate && python$(PYTHON_VERSION) manage.py test ${app} --pattern="test_*.py"
 
 shell:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py shell
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py shell
 
 makemessages:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py makemessages -l en --ignore env*
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py makemessages -l ar --ignore env*
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py makemessages -l en --ignore env*
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py makemessages -l ar --ignore env*
 
 compilemessages:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py compilemessages
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py compilemessages
 
 collect_static:
-	 . env/bin/activate && python$(PYTHON_VERSION) manage.py collectstatic --noinput
+	. env/bin/activate && python$(PYTHON_VERSION) manage.py collectstatic --noinput
 
 
 greenkeeping:
